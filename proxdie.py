@@ -1,6 +1,6 @@
 def add_http_and_replace_colon(filename):
     # Open the input file in read mode
-    with open('input.txt, 'r') as file:
+    with open('input.txt', 'r') as file:
         lines = file.readlines()
 
     # Open a new file to write the modified lines
