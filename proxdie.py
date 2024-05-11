@@ -1,14 +1,18 @@
-def modify_txt_file(filename):
-    with open(filename, 'r') as file:
-        lines = file.readlines()
+# Read the content of the file
+with open('input.txt', 'r') as file:
+    data = file.readlines()
 
-    with open(filename, 'w') as file:
-        modified_lines = []
-        for line in lines:
-            modified_line = line.strip().replace(':', ' ').replace('http', 'http ')
-            modified_lines.append(modified_line)
+# Function to convert the format
+def convert_format(ip_port):
+    ip, port = ip_port.split(':')
+    ip_parts = ip.split('.')
+    new_ip = f'http {int(ip_parts[0])}.{int(ip_parts[1])}.{int(ip_parts[2])}.{int(ip_parts[3])}'
+    new_port = f'    {int(port)}'
+    return f"{new_ip}{new_port}\n"
 
-        file.write(' '.join(modified_lines))
+# Convert the formats for each line
+converted_data = [convert_format(line.strip()) for line in data]
 
-# Usage
-modify_txt_file('your_file.txt')
+# Write the converted data to a new file
+with open('output.txt', 'w') as file:
+    file.writelines(converted_data)
